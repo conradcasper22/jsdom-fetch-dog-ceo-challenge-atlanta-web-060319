@@ -56,19 +56,27 @@ function createBreeds(data){
     if (Array.isArray(data[key]) && data[key].length !== 0 ){
       let mainBreedLi = document.createElement("li")
       mainBreedLi.innerHTML = `<h3>${key}</h3>`
-
+      mainBreedLi.addEventListener("click", changeBreedColor)
       for (let i = 0; i < data[key].length; i++){
        let subBreedLi =  document.createElement('li')
        subBreedLi.innerText = `${data[key][i]} ${key}`
+       subBreedLi.addEventListener("click", changeBreedColor)
        mainBreedLi.appendChild(subBreedLi)
        ul.appendChild(mainBreedLi)
       }
     } else {
       let mainBreedLi = document.createElement("li")
       mainBreedLi.innerText = key
+      mainBreedLi.addEventListener("click", changeBreedColor)
       ul.appendChild(mainBreedLi)
     }
   }
+}
+
+
+function changeBreedColor(e){
+  let colorArray = ["red", "yellow", "green", "turquoise", "magenta", "salmon", "blue", "orange", "black",]
+  e.target.style.color = colorArray[Math.floor(Math.random() * colorArray.length)];
 }
 
 
