@@ -8,6 +8,62 @@ document.addEventListener("DOMContentLoaded", pageSetup)
 function pageSetup(){
   getDogImages()
   getDogBreeds()
+  let dropDown = document.querySelector("#breed-dropdown")
+  dropDown.addEventListener("change", handleBreedDropDown)
+}
+
+
+function handleBreedDropDown(e){
+  let breedList = document.querySelectorAll('.breed')
+
+  breedList.forEach(el => {
+    el.style.display = "block";
+  })
+
+
+  let letter = e.target.value
+
+  selectBreeds(letter)
+
+}
+
+function selectBreeds(l){
+  let letter = l
+  
+  let breedList = document.querySelectorAll('.breed')
+    breedList.forEach(el => {
+      let firstL = el.innerText.charAt(0);
+
+      if (firstL !== letter) {
+
+        el.style.display = "none";
+      } 
+    })
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  // fetch(breedUrl)
+  // .catch(error => console.log("Error:", error))
+  // .then(res => res.json())
+  // .then(data => filterDogBreeds(data))
+
+  // function filterDogBreeds(dataObj){
+
+  // }
+
+
 }
 
 function getDogImages(){
@@ -55,11 +111,13 @@ function createBreeds(data){
     
     if (Array.isArray(data[key]) && data[key].length !== 0 ){
       let mainBreedLi = document.createElement("li")
-      mainBreedLi.innerHTML = `<h3>${key}</h3>`
+      mainBreedLi.innerHTML = `<h3 class = "breed">${key}</h3>`
+      mainBreedLi.className = "breed"
       mainBreedLi.addEventListener("click", changeBreedColor)
       for (let i = 0; i < data[key].length; i++){
        let subBreedLi =  document.createElement('li')
        subBreedLi.innerText = `${data[key][i]} ${key}`
+       subBreedLi.className = "breed"
        subBreedLi.addEventListener("click", changeBreedColor)
        mainBreedLi.appendChild(subBreedLi)
        ul.appendChild(mainBreedLi)
@@ -67,6 +125,7 @@ function createBreeds(data){
     } else {
       let mainBreedLi = document.createElement("li")
       mainBreedLi.innerText = key
+      mainBreedLi.className = "breed"
       mainBreedLi.addEventListener("click", changeBreedColor)
       ul.appendChild(mainBreedLi)
     }
